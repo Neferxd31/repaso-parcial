@@ -1,0 +1,5 @@
+# Material fuente original (PDF, PPTX, fotos del libro): pesa ~30 MB y tiene derechos de autor.
+# La app solo usa los .md de material/.
+[Dd]atos parcial/
+.env*
+node_modules/

@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repaso con la Dra. Michi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff6f9;
+      --surface: #ffffff;
+      --text: #4a3644;
+      --muted: #8f7a89;
+      --border: #f6dbe6;
+      --primary: #36b8a6;
+      --primary-text: #ffffff;
+      --primary-soft: #e0f6f2;
+      --pink: #ff86ad;
+      --pink-soft: #ffe8f0;
+      --lilac: #9b86f0;
+      --lilac-soft: #efeaff;
+      --wrong: #e04f72;
+      --wrong-bg: #fff0f4;
+      --weak: #e58a3a;
+      --weak-bg: #fff4e8;
+      --partial: #b98d00;
+      --partial-bg: #fff8dc;
+      --right: #27a06e;
+      --right-bg: #e6f8ef;
+      --shadow: 0 8px 28px rgba(255, 134, 173, 0.16);
+      --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%23ffc2d6' opacity='0.45'%3E%3Cg transform='translate(18 20) rotate(-20 20 20)'%3E%3Cellipse cx='20' cy='27' rx='10' ry='8'/%3E%3Ccircle cx='9' cy='16' r='4.5'/%3E%3Ccircle cx='16' cy='10' r='4.5'/%3E%3Ccircle cx='24' cy='10' r='4.5'/%3E%3Ccircle cx='31' cy='16' r='4.5'/%3E%3C/g%3E%3Cg transform='translate(84 82) rotate(18 20 20)'%3E%3Cellipse cx='20' cy='27' rx='10' ry='8'/%3E%3Ccircle cx='9' cy='16' r='4.5'/%3E%3Ccircle cx='16' cy='10' r='4.5'/%3E%3Ccircle cx='24' cy='10' r='4.5'/%3E%3Ccircle cx='31' cy='16' r='4.5'/%3E%3C/g%3E%3C/g%3E%3Cpath d='M104 26v12M98 32h12' stroke='%239fe3d8' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M36 104c-6-5-10-8-10-12a5 5 0 0 1 10-2a5 5 0 0 1 10 2c0 4-4 7-10 12z' fill='%23ffc2d6' opacity='0.6'/%3E%3C/svg%3E");
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1f1822;
+        --surface: #2a2130;
+        --text: #f7eaf2;
+        --muted: #bba4b4;
+        --border: #43334a;
+        --primary: #5fd8c7;
+        --primary-text: #1f1822;
+        --primary-soft: #21403d;
+        --pink: #ff9cc0;
+        --pink-soft: #45283a;
+        --lilac: #b6a6ff;
+        --lilac-soft: #352e52;
+        --wrong: #ff8ea8;
+        --wrong-bg: #45232f;
+        --weak: #ffb377;
+        --weak-bg: #432e1c;
+        --partial: #ffd966;
+        --partial-bg: #3d3418;
+        --right: #6ee3ab;
+        --right-bg: #1d3a2d;
+        --shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+        --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%23ff9cc0' opacity='0.08'%3E%3Cg transform='translate(18 20) rotate(-20 20 20)'%3E%3Cellipse cx='20' cy='27' rx='10' ry='8'/%3E%3Ccircle cx='9' cy='16' r='4.5'/%3E%3Ccircle cx='16' cy='10' r='4.5'/%3E%3Ccircle cx='24' cy='10' r='4.5'/%3E%3Ccircle cx='31' cy='16' r='4.5'/%3E%3C/g%3E%3Cg transform='translate(84 82) rotate(18 20 20)'%3E%3Cellipse cx='20' cy='27' rx='10' ry='8'/%3E%3Ccircle cx='9' cy='16' r='4.5'/%3E%3Ccircle cx='16' cy='10' r='4.5'/%3E%3Ccircle cx='24' cy='10' r='4.5'/%3E%3Ccircle cx='31' cy='16' r='4.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--pattern) var(--bg);
+      color: var(--text);
+      font: 17px/1.6 "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 780px; margin: 0 auto; padding: 28px 16px 40px; }
+    h1, h2, h3, button, .tag, .bubble, .grade { font-family: "Fredoka", "Nunito", system-ui, sans-serif; }
+    h1, h2, h3 { line-height: 1.3; }
+    button {
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 16px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 12px 20px;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+    button:not(:disabled):hover { transform: translateY(-2px); border-color: var(--pink); }
+    button:disabled { cursor: default; opacity: 0.55; }
+    .primary { background: var(--primary); border-color: var(--primary); color: var(--primary-text); box-shadow: 0 4px 0 color-mix(in srgb, var(--primary) 70%, #000); }
+    .primary:not(:disabled):hover { border-color: var(--primary); }
+    .primary:not(:disabled):active { transform: translateY(2px); box-shadow: 0 2px 0 color-mix(in srgb, var(--primary) 70%, #000); }
+    .card { background: var(--surface); border: 2px solid var(--border); border-radius: 26px; padding: 28px; box-shadow: var(--shadow); }
+    [hidden] { display: none !important; }
+
+    /* Dra. Michi */
+    .cat-slot svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .cat-slot .eyes-closed, .cat-slot .mouth-open, .cat-slot .mouth-o, .cat-slot .mouth-sad, .cat-slot .tear, .cat-slot .sparkles { display: none; }
+    .mood-cheer .eyes-open, .mood-cheer .mouth-smile { display: none; }
+    .mood-cheer .eyes-closed, .mood-cheer .mouth-open, .mood-cheer .sparkles { display: inline; }
+    .mood-think .mouth-smile { display: none; }
+    .mood-think .mouth-o { display: inline; }
+    .mood-sad .mouth-smile { display: none; }
+    .mood-sad .mouth-sad, .mood-sad .tear { display: inline; }
+    .cat-slot { animation: bob 3s ease-in-out infinite; }
+    .mood-think { animation: tilt 1.4s ease-in-out infinite; }
+    .mood-cheer { animation: hop 0.7s ease-in-out 3; }
+    @keyframes bob { 50% { transform: translateY(-5px); } }
+    @keyframes tilt { 25% { transform: rotate(-6deg); } 75% { transform: rotate(6deg); } }
+    @keyframes hop { 50% { transform: translateY(-14px) scale(1.04); } }
+
+    .bubble {
+      position: relative;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 14px 18px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+    }
+    .bubble::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      background: var(--surface);
+      border-left: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    /* Inicio */
+    .hero { display: flex; align-items: center; gap: 20px; margin-bottom: 26px; }
+    .hero .cat-slot { flex: none; width: 170px; height: 170px; }
+    .hero h1 { font-size: 2rem; margin: 0 0 6px; color: var(--pink); }
+    .hero .bubble p { margin: 0; color: var(--muted); font-family: "Nunito", sans-serif; font-size: 0.98rem; }
+    .hero .bubble strong { color: var(--text); }
+    .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .mode { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; padding: 20px; border-radius: 22px; box-shadow: var(--shadow); }
+    .mode-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+    .mode strong { font-size: 1.15rem; }
+    .mode[aria-pressed="true"] { border-color: var(--pink); background: var(--pink-soft); }
+    .start { display: block; width: 100%; margin-top: 22px; padding: 16px; font-size: 1.15rem; }
+    .mode .hint { color: var(--muted); font-size: 0.95rem; font-family: "Nunito", sans-serif; font-weight: 600; }
+    .mint .mode-icon { background: var(--primary-soft); color: var(--primary); }
+    .pink .mode-icon { background: var(--pink-soft); color: var(--pink); }
+    .lilac .mode-icon { background: var(--lilac-soft); color: var(--lilac); }
+    #start-note { text-align: center; color: var(--muted); min-height: 1.6em; font-weight: 700; }
+    .step { font-size: 1.15rem; margin: 26px 0 12px; }
+    .topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+    .topic-chip { display: flex; align-items: center; gap: 10px; text-align: left; padding: 10px 14px; font-family: "Nunito", sans-serif; font-size: 0.95rem; font-weight: 700; }
+    .topic-chip .num { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; background: var(--lilac-soft); color: var(--lilac); }
+    .topic-chip[aria-pressed="true"] { border-color: var(--pink); background: var(--pink-soft); }
+    .topic-chip[aria-pressed="true"] .num { background: var(--pink); color: var(--surface); }
+    .section-label { margin: 0 0 6px; color: var(--muted); font-weight: 700; font-size: 0.9rem; }
+
+    /* Encabezado de la sección */
+    .quiz-top { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+    .quiz-top .cat-slot { flex: none; width: 92px; height: 92px; }
+    .quiz-top .bubble { flex: 1; }
+    .progress-box { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; padding: 12px 16px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .progress-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; font-weight: 800; }
+    .chip { font-size: 0.85rem; font-weight: 700; color: var(--lilac); background: var(--lilac-soft); border-radius: 999px; padding: 3px 12px; }
+    #paws { display: flex; justify-content: space-between; gap: 4px; }
+    .paw { width: 28px; height: 28px; color: color-mix(in srgb, var(--muted) 25%, transparent); transition: color 0.3s, transform 0.3s; }
+    .paw.current { color: var(--pink); animation: pulse 1.2s ease-in-out infinite; }
+    .paw.lv-Sólida { color: var(--right); }
+    .paw.lv-Parcial { color: var(--partial); }
+    .paw.lv-Superficial { color: var(--weak); }
+    .paw.lv-Incorrecta { color: var(--wrong); }
+    @keyframes pulse { 50% { transform: scale(1.2); } }
+
+    /* Pregunta */
+    .tag { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--primary); background: var(--primary-soft); border-radius: 999px; padding: 4px 14px; }
+    #question { font-size: 1.3rem; font-weight: 600; margin: 14px 0 22px; }
+    #options { display: grid; gap: 12px; }
+    .option { display: flex; align-items: flex-start; gap: 14px; text-align: left; padding: 14px 16px; font-family: "Nunito", sans-serif; font-size: 1rem; }
+    .option:disabled { opacity: 1; }
+    .letter {
+      flex: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      background: var(--pink-soft);
+      color: var(--pink);
+    }
+    .option.right { border-color: var(--right); background: var(--right-bg); }
+    .option.right .letter { background: var(--right); color: var(--surface); }
+    .option.wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+    .option.wrong .letter { background: var(--wrong); color: var(--surface); }
+    label { display: block; font-weight: 800; margin-bottom: 8px; }
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      font: inherit;
+      color: var(--text);
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: var(--pink); }
+    #open-form button { margin-top: 12px; }
+    .your-answer { background: var(--lilac-soft); border-radius: 16px; padding: 14px 16px; }
+    .your-answer h3 { margin: 0 0 4px; font-size: 0.95rem; color: var(--lilac); }
+    .your-answer p { margin: 0; white-space: pre-wrap; }
+
+    /* Retroalimentación */
+    #feedback:not(:empty) { margin-top: 18px; border-radius: 16px; padding: 16px 18px; border: 2px solid; }
+    #feedback h3 { margin: 0 0 8px; font-size: 1.1rem; }
+    #feedback p { margin: 0 0 10px; color: var(--text); }
+    #feedback details { color: var(--text); }
+    #feedback summary { cursor: pointer; font-weight: 800; }
+    #feedback .source { margin: 12px 0 0; font-size: 0.92rem; font-style: italic; color: var(--muted); }
+    .level-Incorrecta { color: var(--wrong); background: var(--wrong-bg); border-color: var(--wrong); }
+    .level-Superficial { color: var(--weak); background: var(--weak-bg); border-color: var(--weak); }
+    .level-Parcial { color: var(--partial); background: var(--partial-bg); border-color: var(--partial); }
+    .level-Sólida { color: var(--right); background: var(--right-bg); border-color: var(--right); }
+    #next { margin-top: 20px; width: 100%; }
+
+    /* Cargando y errores */
+    #loading { padding: 30px 0; text-align: center; }
+    .dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; }
+    #loading-time { margin: 0; color: var(--muted); font-weight: 700; }
+    .back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 8px 16px; font-size: 0.95rem; }
+    #loading span { width: 14px; height: 14px; border-radius: 50%; background: var(--pink); animation: dot 1s ease-in-out infinite; }
+    #loading span:nth-child(2) { background: var(--primary); animation-delay: 0.15s; }
+    #loading span:nth-child(3) { background: var(--lilac); animation-delay: 0.3s; }
+    @keyframes dot { 50% { transform: translateY(-12px); } }
+    #error { margin-top: 18px; text-align: center; background: var(--wrong-bg); color: var(--wrong); border-radius: 16px; padding: 16px; font-weight: 700; }
+    #error p { margin: 0 0 12px; }
+
+    /* Resultado */
+    .result { text-align: center; }
+    .result .cat-slot { width: 170px; height: 170px; margin: -10px auto 0; }
+    .grade { font-size: 3.4rem; font-weight: 700; margin: 4px 0 0; line-height: 1.1; }
+    .grade small { font-size: 1.2rem; color: var(--muted); }
+    .passed .grade, .passed h2 { color: var(--right); }
+    .failed .grade, .failed h2 { color: var(--wrong); }
+    .result h2 { margin: 6px 0; font-size: 1.6rem; }
+    .result > p { color: var(--muted); margin: 0 auto 22px; max-width: 460px; }
+    #summary { list-style: none; padding: 0; margin: 0 0 24px; text-align: left; display: grid; gap: 10px; }
+    #summary li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; border: 2px solid var(--border); border-radius: 16px; }
+    #summary .paw { width: 24px; height: 24px; }
+    .summary-question { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.95rem; }
+    .badge { font-size: 0.8rem; font-weight: 800; border-radius: 999px; padding: 3px 10px; white-space: nowrap; border: 0; }
+
+    .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+    .confetti span { position: absolute; top: -40px; font-size: 22px; animation: fall linear forwards; }
+    @keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
+
+    footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding-bottom: 24px; }
+    footer span { color: var(--pink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cat-slot, .paw.current, #loading span { animation: none !important; }
+      .confetti { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      main { padding-top: 18px; }
+      .card { padding: 20px 16px; border-radius: 22px; }
+      .hero { flex-direction: column; text-align: center; gap: 8px; }
+      .hero .cat-slot { width: 140px; height: 140px; }
+      .hero h1 { font-size: 1.7rem; }
+      .hero .bubble::before { left: 50%; top: -10px; transform: translateX(-50%) rotate(135deg); }
+      .quiz-top .cat-slot { width: 74px; height: 74px; }
+      .quiz-top .bubble { font-size: 0.95rem; padding: 12px 14px; }
+      #question { font-size: 1.15rem; }
+      .paw { width: 24px; height: 24px; }
+      #summary li { grid-template-columns: auto 1fr; }
+      .badge { grid-column: 2; justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <symbol id="paw" viewBox="0 0 40 40">
+      <g fill="currentColor">
+        <ellipse cx="20" cy="27" rx="10" ry="8" />
+        <circle cx="9" cy="16" r="4.5" />
+        <circle cx="16" cy="9" r="4.5" />
+        <circle cx="24" cy="9" r="4.5" />
+        <circle cx="31" cy="16" r="4.5" />
+      </g>
+    </symbol>
+  </svg>
+
+  <template id="cat-template">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <!-- Bata y estetoscopio -->
+      <path d="M38 200c2-40 27-60 62-60s60 20 62 60z" fill="#ffffff" stroke="#6b4a3a" stroke-width="3" />
+      <path d="M100 142l-14 58M100 142l14 58" stroke="#e8d7de" stroke-width="3" />
+      <path d="M72 146c-2 26 16 36 28 24" stroke="#6c7fa8" stroke-width="5" fill="none" stroke-linecap="round" />
+      <path d="M128 146c2 19 0 29-4 36" stroke="#6c7fa8" stroke-width="5" fill="none" stroke-linecap="round" />
+      <circle cx="122" cy="187" r="8" fill="#d3ddf2" stroke="#6c7fa8" stroke-width="4" />
+      <!-- Orejas -->
+      <path d="M46 80l6-58 40 28z" fill="#ffd7a8" stroke="#6b4a3a" stroke-width="3" stroke-linejoin="round" />
+      <path d="M58 66l3-26 19 14z" fill="#ffb3c7" />
+      <path d="M154 80l-6-58-40 28z" fill="#ffd7a8" stroke="#6b4a3a" stroke-width="3" stroke-linejoin="round" />
+      <path d="M142 66l-3-26-19 14z" fill="#ffb3c7" />
+      <!-- Cabeza -->
+      <ellipse cx="100" cy="98" rx="64" ry="54" fill="#ffd7a8" stroke="#6b4a3a" stroke-width="3" />
+      <path d="M38 90h11M39 101h9M162 90h-11M161 101h-9" stroke="#f2a76a" stroke-width="4" stroke-linecap="round" />
+      <!-- Gorrito -->
+      <path d="M72 56c0-24 56-24 56 0z" fill="#ffffff" stroke="#6b4a3a" stroke-width="3" stroke-linejoin="round" />
+      <path d="M100 38v13M93.5 44.5h13" stroke="#ff6f91" stroke-width="4.5" stroke-linecap="round" />
+      <!-- Ojos -->
+      <g class="eyes-open">
+        <ellipse cx="76" cy="98" rx="11" ry="13" fill="#3b2a2f" />
+        <ellipse cx="124" cy="98" rx="11" ry="13" fill="#3b2a2f" />
+        <circle cx="80" cy="93" r="4" fill="#ffffff" />
+        <circle cx="73" cy="103" r="2" fill="#ffffff" />
+        <circle cx="128" cy="93" r="4" fill="#ffffff" />
+        <circle cx="121" cy="103" r="2" fill="#ffffff" />
+      </g>
+      <g class="eyes-closed" stroke="#3b2a2f" stroke-width="4.5" fill="none" stroke-linecap="round">
+        <path d="M65 101q11-13 22 0" />
+        <path d="M113 101q11-13 22 0" />
+      </g>
+      <!-- Mejillas, nariz y bigotes -->
+      <ellipse cx="58" cy="119" rx="10" ry="6" fill="#ffb3c7" opacity="0.85" />
+      <ellipse cx="142" cy="119" rx="10" ry="6" fill="#ffb3c7" opacity="0.85" />
+      <path d="M95 111h10l-5 6z" fill="#ff8fab" stroke="#ff8fab" stroke-width="2" stroke-linejoin="round" />
+      <g stroke="#6b4a3a" stroke-width="2" stroke-linecap="round" opacity="0.55">
+        <path d="M28 112l20 3M30 126l19-5M172 112l-20 3M170 126l-19-5" />
+      </g>
+      <!-- Bocas según el ánimo -->
+      <path class="mouth-smile" d="M88 121q6 7 12 0q6 7 12 0" stroke="#6b4a3a" stroke-width="3" fill="none" stroke-linecap="round" />
+      <path class="mouth-open" d="M88 120q12 20 24 0z" fill="#ff6f91" stroke="#6b4a3a" stroke-width="3" stroke-linejoin="round" />
+      <ellipse class="mouth-o" cx="100" cy="126" rx="5" ry="6" fill="#ff6f91" stroke="#6b4a3a" stroke-width="3" />
+      <path class="mouth-sad" d="M90 129q10-9 20 0" stroke="#6b4a3a" stroke-width="3" fill="none" stroke-linecap="round" />
+      <path class="tear" d="M134 112q7 10 0 15q-7-5 0-15z" fill="#8fd3ff" />
+      <g class="sparkles" fill="#ffc94d">
+        <path d="M172 34l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" />
+        <path d="M26 26l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" />
+        <path d="M182 92l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" />
+      </g>
+    </svg>
+  </template>
+
+  <main>
+    <section id="start-screen" class="screen">
+      <div class="hero">
+        <div class="cat-slot" id="hero-cat"></div>
+        <div class="bubble">
+          <h1>¡Hola! Soy la Dra. Michi</h1>
+          <p>Vamos a repasar tu material en <strong>secciones de 10 preguntas</strong>. Al final te doy una nota de 0 a 5, y apruebas con <strong>3.0</strong>. ¡Tú puedes!</p>
+        </div>
+      </div>
+      <h2 class="step">1. ¿Qué tema quieres repasar?</h2>
+      <div id="topics" class="topics"></div>
+      <h2 class="step">2. Elige el tipo de sección</h2>
+      <div class="modes">
+        <button class="mode mint" data-mode="mcq" aria-pressed="false">
+          <span class="mode-icon">ABC</span>
+          <strong>Opción múltiple</strong>
+          <span class="hint">Eliges entre A, B, C y D</span>
+        </button>
+        <button class="mode pink" data-mode="open" aria-pressed="false">
+          <span class="mode-icon">✎</span>
+          <strong>Abiertas</strong>
+          <span class="hint">Respondes con tus palabras</span>
+        </button>
+        <button class="mode lilac" data-mode="mixed" aria-pressed="false">
+          <span class="mode-icon">⇄</span>
+          <strong>Mixta</strong>
+          <span class="hint">Alterna los dos tipos</span>
+        </button>
+      </div>
+      <button id="start" class="primary start api" data-label="Empezar prueba">Empezar prueba</button>
+      <p id="start-note"></p>
+    </section>
+
+    <section id="quiz-screen" class="screen" hidden>
+      <button id="back" class="back">← Volver al menú</button>
+      <div class="quiz-top">
+        <div class="cat-slot" id="quiz-cat"></div>
+        <div class="bubble" id="quiz-bubble"></div>
+      </div>
+      <div class="progress-box">
+        <p id="section-label" class="section-label"></p>
+        <div class="progress-head">
+          <span id="progress-label"></span>
+          <span id="type-label" class="chip"></span>
+        </div>
+        <div id="paws"></div>
+      </div>
+
+      <article class="card">
+        <div id="question-block">
+          <span id="topic" class="tag"></span>
+          <h2 id="question"></h2>
+          <div id="options"></div>
+          <form id="open-form">
+            <label for="answer">Tu respuesta</label>
+            <textarea id="answer" placeholder="Escribe con tus propias palabras…"></textarea>
+            <button class="primary api" data-label="Enviar respuesta">Enviar respuesta</button>
+          </form>
+          <div id="your-answer" class="your-answer" hidden>
+            <h3>Tu respuesta</h3>
+            <p id="your-answer-text"></p>
+          </div>
+          <div id="feedback"></div>
+        </div>
+
+        <div id="loading" hidden>
+          <div class="dots"><span></span><span></span><span></span></div>
+          <p id="loading-time"></p>
+        </div>
+
+        <div id="error" hidden>
+          <p id="error-text"></p>
+          <button id="retry" class="api" data-label="Reintentar">Reintentar</button>
+        </div>
+
+        <button id="next" class="primary api" data-label="Siguiente pregunta" hidden>Siguiente pregunta</button>
+      </article>
+    </section>
+
+    <section id="result-screen" class="screen" hidden>
+      <div id="result-card" class="card result">
+        <div class="cat-slot" id="result-cat"></div>
+        <p class="grade"><span id="grade"></span> <small>/ 5.0</small></p>
+        <h2 id="verdict"></h2>
+        <p id="verdict-text"></p>
+        <ol id="summary"></ol>
+        <button id="restart" class="primary">Nueva sección</button>
+      </div>
+    </section>
+  </main>
+  <footer>Hecho con <span>♥</span> para tu parcial</footer>
+
+  <script>
+    const sectionSize = 10;
+    const passingGrade = 3;
+    const letters = ['A', 'B', 'C', 'D'];
+    // Puntaje de cada nivel de las preguntas abiertas (una de opción múltiple vale 1 o 0).
+    const points = { Incorrecta: 0, Superficial: 0.3, Parcial: 0.6, Sólida: 1 };
+    const typeNames = { mcq: 'Opción múltiple', open: 'Pregunta abierta' };
+    // Límites del plan gratuito de Gemini 3.5 Flash Lite.
+    const requestsPerMinute = 15;
+    const tokensPerMinute = 250000;
+
+    const phrases = {
+      mcq: ['Lee con calma y elige la mejor opción.', 'Piensa bien antes de elegir, ¡confío en ti!', 'Descarta primero las que seguro no son.'],
+      open: ['Explícalo con tus palabras, ¡sin miedo!', 'Cuéntame todo lo que sepas sobre esto.', 'Mientras más completa, mejor nota.'],
+      right: ['¡Miau-ravilloso! Lo tienes clarísimo.', '¡Excelente diagnóstico!', '¡Eso es! Estoy muy orgullosa de ti.'],
+      almost: ['¡Vas bien! Mira qué te faltó para que quede perfecta.', 'Casi casi, revisa los detalles que faltaron.'],
+      wrong: ['No pasa nada, de los errores se aprende. Lee la explicación.', 'Tranqui, para eso practicamos. Mira la corrección.'],
+    };
+
+    const asked = [];
+    const allTopics = { id: 'all', title: 'Repaso general (todos los temas)' };
+    let topic = allTopics;
+    // selectedMode es lo elegido en el menú; mode, el tipo de la sección en curso.
+    let selectedMode = null;
+    let mode = null;
+    let results = [];
+    let current = null;
+    let busy = false;
+    let readyAt = 0;
+    let retryAction = null;
+    // Si la estudiante vuelve al menú con una consulta en curso, su respuesta ya no debe pintarse.
+    let sectionRun = 0;
+
+    const $ = (id) => document.getElementById(id);
+    const pick = (list) => list[Math.floor(Math.random() * list.length)];
+
+    function el(tag, text, className) {
+      const node = document.createElement(tag);
+      if (text) node.textContent = text;
+      if (className) node.className = className;
+      return node;
+    }
+
+    function pawIcon(className) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      use.setAttribute('href', '#paw');
+      svg.setAttribute('class', `paw ${className}`);
+      svg.append(use);
+      return svg;
+    }
+
+    function setMood(slotId, mood) {
+      // Reinicia la animación aunque el ánimo se repita.
+      $(slotId).className = 'cat-slot';
+      void $(slotId).offsetWidth;
+      $(slotId).className = `cat-slot mood-${mood}`;
+    }
+
+    function say(mood, text) {
+      setMood('quiz-cat', mood);
+      $('quiz-bubble').textContent = text;
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach((screen) => (screen.hidden = screen.id !== id));
+      window.scrollTo(0, 0);
+    }
+
+    // Espera mínima entre consultas para no pasar los límites por minuto; con material grande crece sola.
+    function startCooldown(seconds) {
+      readyAt = Date.now() + seconds * 1000;
+      refreshButtons();
+    }
+
+    function cooldownFor(tokens) {
+      const byRequests = 60 / requestsPerMinute;
+      const byTokens = (tokens / tokensPerMinute) * 60;
+      return Math.ceil(Math.max(byRequests, byTokens) * 1.2);
+    }
+
+    function refreshButtons() {
+      const remaining = Math.max(0, Math.ceil((readyAt - Date.now()) / 1000));
+      document.querySelectorAll('.api').forEach((button) => {
+        button.disabled = busy || remaining > 0;
+        if (button.dataset.label) {
+          button.textContent = remaining > 0 ? `${button.dataset.label} · espera ${remaining} s` : button.dataset.label;
+        }
+      });
+      // Sin tipo de sección elegido no hay prueba que empezar.
+      if (!selectedMode) $('start').disabled = true;
+      if (remaining > 0) $('start-note').textContent = `La Dra. Michi estará lista en ${remaining} s…`;
+      else $('start-note').textContent = selectedMode ? '' : 'Elige el tipo de sección para empezar.';
+    }
+
+    async function callQuiz(body) {
+      const response = await fetch('/api/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await response.json().catch(() => ({ error: 'Error inesperado del servidor.' }));
+      startCooldown(response.status === 429 ? 60 : cooldownFor(data.tokens ?? 0));
+      if (!response.ok) throw new Error(data.error);
+      return data;
+    }
+
+    async function run(action, loadingText, hideQuestion) {
+      busy = true;
+      refreshButtons();
+      say('think', loadingText);
+      $('error').hidden = true;
+      $('question-block').hidden = hideQuestion;
+      $('loading').hidden = false;
+      const startedAt = Date.now();
+      const showElapsed = () => {
+        const seconds = Math.round((Date.now() - startedAt) / 1000);
+        $('loading-time').textContent = `Llevamos ${seconds} s · suele tardar de 2 a 6 s`;
+      };
+      showElapsed();
+      const timer = setInterval(showElapsed, 1000);
+      const runId = sectionRun;
+      try {
+        await action();
+      } catch (error) {
+        if (runId === sectionRun) {
+          say('sad', 'Ups, algo falló. Intentemos de nuevo.');
+          $('error-text').textContent = error.message;
+          $('error').hidden = false;
+          retryAction = () => run(action, loadingText, hideQuestion);
+        }
+      }
+      clearInterval(timer);
+      $('loading').hidden = true;
+      busy = false;
+      refreshButtons();
+    }
+
+    // Las secciones salen de los .md de material/, así que al cambiar de materia la lista se actualiza sola.
+    async function loadTopics() {
+      const response = await fetch('/api/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'topics' }),
+      }).catch(() => null);
+      const data = (await response?.json().catch(() => null)) ?? { topics: [] };
+      renderTopics([allTopics, ...data.topics]);
+    }
+
+    function renderTopics(topics) {
+      const chips = topics.map((item, index) => {
+        const chip = el('button', '', 'topic-chip');
+        chip.append(el('span', index === 0 ? '★' : `${index}`, 'num'), el('span', item.title));
+        chip.setAttribute('aria-pressed', item.id === topic.id);
+        chip.addEventListener('click', () => {
+          topic = item;
+          document.querySelectorAll('.topic-chip').forEach((other) => other.setAttribute('aria-pressed', other === chip));
+        });
+        return chip;
+      });
+      $('topics').replaceChildren(...chips);
+    }
+
+    function questionType() {
+      if (mode !== 'mixed') return mode;
+      return results.length % 2 === 0 ? 'mcq' : 'open';
+    }
+
+    function selectMode(button) {
+      selectedMode = button.dataset.mode;
+      document.querySelectorAll('.mode').forEach((other) => other.setAttribute('aria-pressed', other === button));
+      refreshButtons();
+    }
+
+    function startSection() {
+      mode = selectedMode;
+      results = [];
+      sectionRun++;
+      $('section-label').textContent = topic.title;
+      showScreen('quiz-screen');
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      $('next').hidden = true;
+      renderProgress();
+      run(async () => {
+        const type = questionType();
+        const runId = sectionRun;
+        const question = await callQuiz({ type, topic: topic.id, asked });
+        if (runId !== sectionRun) return;
+        current = { type, ...question };
+        asked.push(current.question);
+        renderQuestion();
+      }, 'Buscando una buena pregunta en tu material…', true);
+    }
+
+    function renderProgress() {
+      $('progress-label').textContent = `Pregunta ${results.length + 1} de ${sectionSize}`;
+      $('type-label').textContent = typeNames[questionType()];
+      renderPaws();
+    }
+
+    function renderPaws() {
+      const paws = [];
+      for (let index = 0; index < sectionSize; index++) {
+        const result = results[index];
+        if (result) paws.push(pawIcon(`lv-${result.level}`));
+        else paws.push(pawIcon(index === results.length ? 'current' : ''));
+      }
+      $('paws').replaceChildren(...paws);
+    }
+
+    function renderQuestion() {
+      say('happy', pick(phrases[current.type]));
+      $('question-block').hidden = false;
+      $('topic').textContent = current.topic;
+      $('question').textContent = current.question;
+      $('options').replaceChildren();
+      $('feedback').replaceChildren();
+      $('feedback').className = '';
+      $('your-answer').hidden = true;
+      $('open-form').hidden = current.type !== 'open';
+      $('answer').value = '';
+
+      if (current.type !== 'mcq') return;
+      current.options.forEach((option, index) => {
+        const button = el('button', '', 'option');
+        button.append(el('span', letters[index], 'letter'), el('span', option.text));
+        button.addEventListener('click', () => chooseOption(index));
+        $('options').append(button);
+      });
+    }
+
+    function chooseOption(chosen) {
+      const buttons = $('options').querySelectorAll('button');
+      buttons.forEach((button) => (button.disabled = true));
+      buttons[current.correctIndex].classList.add('right');
+
+      const correct = current.options[current.correctIndex];
+      const isRight = chosen === current.correctIndex;
+
+      if (isRight) {
+        say('cheer', pick(phrases.right));
+        $('feedback').className = 'level-Sólida';
+        $('feedback').append(el('h3', '¡Correcto!'), el('p', correct.explanation));
+      } else {
+        say('sad', pick(phrases.wrong));
+        buttons[chosen].classList.add('wrong');
+        $('feedback').className = 'level-Incorrecta';
+        $('feedback').append(
+          el('h3', 'Incorrecto'),
+          el('p', `Elegiste ${letters[chosen]}: ${current.options[chosen].explanation}`),
+          el('p', `La correcta es ${letters[current.correctIndex]} (${correct.text}): ${correct.explanation}`),
+        );
+      }
+      results.push({
+        question: current.question,
+        label: isRight ? 'Correcta' : 'Incorrecta',
+        level: isRight ? 'Sólida' : 'Incorrecta',
+        points: isRight ? 1 : 0,
+      });
+      finishAnswer();
+    }
+
+    function submitAnswer(event) {
+      event.preventDefault();
+      const answer = $('answer').value.trim();
+      if (!answer) return $('answer').focus();
+
+      run(async () => {
+        const runId = sectionRun;
+        const grade = await callQuiz({ type: 'grade', topic: topic.id, question: current.question, answer });
+        if (runId !== sectionRun) return;
+        $('open-form').hidden = true;
+        $('your-answer-text').textContent = answer;
+        $('your-answer').hidden = false;
+        showGrade(grade);
+        results.push({ question: current.question, label: grade.level, level: grade.level, points: points[grade.level] });
+        finishAnswer();
+      }, 'Leyendo tu respuesta con mucha atención…', false);
+    }
+
+    function showGrade(grade) {
+      if (grade.level === 'Sólida') say('cheer', pick(phrases.right));
+      else if (grade.level === 'Incorrecta') say('sad', pick(phrases.wrong));
+      else say('happy', pick(phrases.almost));
+
+      const reference = el('details');
+      reference.append(el('summary', 'Ver respuesta de referencia'), el('p', grade.modelAnswer));
+
+      $('feedback').className = `level-${grade.level}`;
+      $('feedback').append(el('h3', `Respuesta ${grade.level.toLowerCase()}`), el('p', grade.feedback));
+      if (grade.missing) $('feedback').append(el('p', `Qué te faltó: ${grade.missing}`));
+      $('feedback').append(reference);
+    }
+
+    function finishAnswer() {
+      // La cita fue verificada en el servidor: le muestra de dónde sale la pregunta en su material.
+      $('feedback').append(el('p', `Según tu material: «${current.quote}»`, 'source'));
+      renderPaws();
+      $('next').dataset.label = results.length === sectionSize ? 'Ver mi calificación' : 'Siguiente pregunta';
+      $('next').hidden = false;
+      refreshButtons();
+      $('feedback').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function throwConfetti() {
+      const confetti = el('div', '', 'confetti');
+      const colors = ['#ff86ad', '#36b8a6', '#9b86f0', '#ffc94d'];
+      for (let index = 0; index < 28; index++) {
+        const piece = el('span', index % 3 === 0 ? '✚' : '♥');
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.color = pick(colors);
+        piece.style.animationDuration = `${2.5 + Math.random() * 2}s`;
+        piece.style.animationDelay = `${Math.random() * 0.8}s`;
+        confetti.append(piece);
+      }
+      document.body.append(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }
+
+    function showResults() {
+      const total = results.reduce((sum, result) => sum + result.points, 0);
+      const grade = Math.round((total / sectionSize) * 5 * 10) / 10;
+      const passed = grade >= passingGrade;
+
+      $('grade').textContent = grade.toFixed(1);
+      $('result-card').className = `card result ${passed ? 'passed' : 'failed'}`;
+      $('verdict').textContent = passed ? '¡Aprobaste!' : 'Aún no apruebas';
+      $('verdict-text').textContent = passed
+        ? 'La Dra. Michi está muy orgullosa de ti. Abajo puedes ver en qué preguntas mejorar.'
+        : `Necesitas ${passingGrade.toFixed(1)} para aprobar. Repasa los temas de las huellitas rojas y amarillas, y vuelve a intentarlo. ¡Tú puedes!`;
+
+      $('summary').replaceChildren(
+        ...results.map((result) => {
+          const item = el('li');
+          item.append(
+            pawIcon(`lv-${result.level}`),
+            el('span', result.question, 'summary-question'),
+            el('span', result.label, `badge level-${result.level}`),
+          );
+          return item;
+        }),
+      );
+      showScreen('result-screen');
+      setMood('result-cat', passed ? 'cheer' : 'sad');
+      if (passed) throwConfetti();
+    }
+
+    document.querySelectorAll('.cat-slot').forEach((slot) => slot.append($('cat-template').content.cloneNode(true)));
+    document.querySelectorAll('.mode').forEach((button) => button.addEventListener('click', () => selectMode(button)));
+    $('start').addEventListener('click', startSection);
+    $('open-form').addEventListener('submit', submitAnswer);
+    $('next').addEventListener('click', () => (results.length === sectionSize ? showResults() : nextQuestion()));
+    $('retry').addEventListener('click', () => retryAction());
+    $('restart').addEventListener('click', () => showScreen('start-screen'));
+    $('back').addEventListener('click', () => {
+      const inProgress = results.length > 0 && results.length < sectionSize;
+      if (inProgress && !confirm('Si vuelves al menú perderás el progreso de esta sección. ¿Quieres salir?')) return;
+      sectionRun++;
+      showScreen('start-screen');
+    });
+    setInterval(refreshButtons, 250);
+    loadTopics();
+  </script>
+</body>
+</html>
