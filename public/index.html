@@ -243,9 +243,16 @@
     .result h2 { margin: 6px 0; font-size: 1.6rem; }
     .result > p { color: var(--muted); margin: 0 auto 22px; max-width: 460px; }
     #summary { list-style: none; padding: 0; margin: 0 0 24px; text-align: left; display: grid; gap: 10px; }
-    #summary li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; border: 2px solid var(--border); border-radius: 16px; }
+    #summary li { border: 2px solid var(--border); border-radius: 16px; }
+    #summary summary { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; cursor: pointer; list-style: none; }
+    #summary summary::-webkit-details-marker { display: none; }
     #summary .paw { width: 24px; height: 24px; }
     .summary-question { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.95rem; }
+    #summary details[open] .summary-question { display: block; font-weight: 700; }
+    .review { padding: 0 14px 14px; font-size: 0.95rem; }
+    .review p { margin: 10px 0 0; white-space: pre-wrap; }
+    .review strong { display: block; color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    .review-hint { color: var(--muted); font-size: 0.9rem; margin: 0 0 10px; text-align: left; }
     .badge { font-size: 0.8rem; font-weight: 800; border-radius: 999px; padding: 3px 10px; white-space: nowrap; border: 0; }
 
     .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
@@ -272,7 +279,7 @@
       .quiz-top .bubble { font-size: 0.95rem; padding: 12px 14px; }
       #question { font-size: 1.15rem; }
       .paw { width: 24px; height: 24px; }
-      #summary li { grid-template-columns: auto 1fr; }
+      #summary summary { grid-template-columns: auto 1fr; }
       .badge { grid-column: 2; justify-self: start; }
     }
   </style>
@@ -428,6 +435,7 @@
         <p class="grade"><span id="grade"></span> <small>/ 5.0</small></p>
         <h2 id="verdict"></h2>
         <p id="verdict-text"></p>
+        <p class="review-hint">Toca cada pregunta para ver tu respuesta y la corrección.</p>
         <ol id="summary"></ol>
         <button id="restart" class="primary">Nueva sección</button>
       </div>
@@ -691,8 +699,17 @@
           el('p', `La correcta es ${letters[current.correctIndex]} (${correct.text}): ${correct.explanation}`),
         );
       }
+      const review = isRight
+        ? [['Por qué es correcta', correct.explanation]]
+        : [
+            ['Por qué está mal', current.options[chosen].explanation],
+            ['Respuesta correcta', `${letters[current.correctIndex]}. ${correct.text}\n${correct.explanation}`],
+          ];
       results.push({
         question: current.question,
+        answer: `${letters[chosen]}. ${current.options[chosen].text}`,
+        review,
+        quote: current.quote,
         label: isRight ? 'Correcta' : 'Incorrecta',
         level: isRight ? 'Sólida' : 'Incorrecta',
         points: isRight ? 1 : 0,
@@ -713,7 +730,18 @@
         $('your-answer-text').textContent = answer;
         $('your-answer').hidden = false;
         showGrade(grade);
-        results.push({ question: current.question, label: grade.level, level: grade.level, points: points[grade.level] });
+        const review = [['Retroalimentación', grade.feedback]];
+        if (grade.missing) review.push(['Qué te faltó', grade.missing]);
+        review.push(['Respuesta de referencia', grade.modelAnswer]);
+        results.push({
+          question: current.question,
+          answer,
+          review,
+          quote: current.quote,
+          label: grade.level,
+          level: grade.level,
+          points: points[grade.level],
+        });
         finishAnswer();
       }, 'Leyendo tu respuesta con mucha atención…', false);
     }
@@ -771,12 +799,25 @@
 
       $('summary').replaceChildren(
         ...results.map((result) => {
-          const item = el('li');
-          item.append(
+          const summary = el('summary');
+          summary.append(
             pawIcon(`lv-${result.level}`),
             el('span', result.question, 'summary-question'),
             el('span', result.label, `badge level-${result.level}`),
           );
+
+          const review = el('div', '', 'review');
+          const sections = [['Tu respuesta', result.answer], ...result.review, ['Según tu material', result.quote]];
+          sections.forEach(([label, text]) => {
+            const paragraph = el('p');
+            paragraph.append(el('strong', label), text);
+            review.append(paragraph);
+          });
+
+          const details = el('details');
+          details.append(summary, review);
+          const item = el('li');
+          item.append(details);
           return item;
         }),
       );
