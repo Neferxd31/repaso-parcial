@@ -26,6 +26,8 @@ Este archivo no lo lee el chatbot. Sirve para que revises qué se tomó de cada 
 | SISTEMA NERVIOSO.pdf (apuntes escaneados) | Capas germinales, divisiones del encéfalo y del SN, nervios espinales, plexos, LCR | 02, 05, 06, 07 |
 | MEDULA ESPINAL.pptx (27 diapos + notas + 24 imágenes) | Columna, médula, sustancia gris y blanca, vías, NMS/NMI, reflejos | 07, 08 |
 | TALLO CEREBRAL.pptx (32 diapos + notas + 26 imágenes) | Bulbo, puente, mesencéfalo, niveles de corte, núcleos de pares craneales | 09, 10 |
+| TALLO CEREBRAL v2.pptx (versión 2026, 46 diapos) | Lo mismo que la versión 2024 más la tabla del libro de pares craneales (componentes, función, forámenes) y figuras de cada par | 09, 10 |
+| ANATOMIA INTRODUCTORIA.pptx (25 diapos + notas + 38 imágenes) | Enfoques, anatomía de superficie, posición y planos, orientación en el SN, huesos, articulaciones, ligamentos, músculos, movimientos | 00 |
 | RESUMEN - PARES CRANEALES.docx | Los 12 pares en detalle | 10 |
 | RESUMEN - PARES CRANEALES (1).docx | Copia idéntica (mismo hash) | — (ignorada) |
 | Libro fotos 1–8 (atlas) | Vistas y cortes del encéfalo, ventrículos, cerebelo | 05, 06, 09 |

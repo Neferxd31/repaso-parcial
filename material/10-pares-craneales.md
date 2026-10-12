@@ -32,6 +32,51 @@
 - XII Hipogloso (mayor) | surco preolivar del bulbo (parte anterior de la médula oblongada) | agujero condíleo anterior | músculos de la lengua y músculos hioideos | va a la punta de la lengua por debajo del nervio lingual; forma el asa del hipogloso.
 - Figura del SNP (Unidad 9): I nariz; II ojo; III todos los músculos del ojo excepto los del IV y VI; IV oblicuo superior; V sensitivo de cara, senos y dientes, motor de la masticación; VI recto externo; VII músculos de la cara y, por el nervio intermedio, secreción de las glándulas submaxilar (submandibular) y sublingual y gusto de la parte anterior de la lengua y del paladar blando; VIII oído interno; IX musculatura faríngea, sensibilidad de la parte posterior de la lengua, amígdala y faringe; X motor de corazón, pulmones, bronquios y tracto gastrointestinal, sensitivo de corazón, pulmones, bronquios, tráquea, laringe, faringe, tracto gastrointestinal y oído externo; XI esternocleidomastoideo y trapecio; XII músculos de la lengua.
 
+## Tabla del libro: componentes, función y forámenes (presentación "Tallo cerebral y pares craneales" 2026)
+- Abreviaturas de componentes: ASG = aferente somático general; ASE = aferente somático especial; AVG = aferente visceral general; AVE = aferente visceral especial; ESG = eferente somático general; EVG = eferente visceral general (parasimpático); EVE = eferente visceral especial.
+- I Olfatorio | sensitivo (AVE) | olfato | aberturas de la lámina cribosa del etmoides.
+- II Óptico | sensitivo (ASE) | visión | conducto óptico.
+- III Oculomotor | motor (ESG, EVG) | eleva el párpado superior, gira el globo ocular hacia arriba, abajo y medialmente, contrae la pupila y acomoda el ojo | fisura orbitaria superior.
+- IV Troclear | motor (ESG) | ayuda a girar el globo ocular hacia abajo y lateralmente | fisura orbitaria superior.
+- V Trigémino:
+  - División oftálmica | sensitivo (ASG) | córnea, piel de la frente, cuero cabelludo, párpados y nariz; mucosa de los senos paranasales y la cavidad nasal | fisura orbitaria superior.
+  - División maxilar | sensitivo (ASG) | piel de la cara sobre el maxilar superior, dientes del maxilar superior, mucosa de la nariz, seno maxilar y paladar | foramen redondo.
+  - División mandibular | motor (EVE) | músculos de la masticación, milohioideo, vientre anterior del digástrico, tensor del velo del paladar y tensor del tímpano | foramen oval. Y sensitivo (ASG) | piel de la mejilla, de la mandíbula y del lado de la cabeza, dientes del maxilar inferior, articulación temporomandibular, mucosa de la boca y parte anterior de la lengua.
+- VI Abducens | motor (ESG) | el músculo recto lateral gira el globo ocular lateralmente | fisura orbitaria superior.
+- VII Facial | meato acústico interno, conducto facial y foramen estilomastoideo:
+  - Motor (EVE): músculos de la cara y del cuero cabelludo, músculo del estribo (estapedio), vientre posterior del digástrico y estilohioideo.
+  - Sensitivo (AVE): gusto de los dos tercios anteriores de la lengua, el piso de la boca y el paladar.
+  - Secretomotor parasimpático (EVG): glándulas salivales submandibulares y sublinguales, glándula lagrimal y glándulas de la nariz y el paladar.
+- VIII Vestibulococlear:
+  - Vestibular | sensitivo (ASE) | del utrículo, el sáculo y los conductos semicirculares: posición y movimiento de la cabeza.
+  - Coclear | sensitivo (ASE) | órgano de Corti: audición.
+- IX Glosofaríngeo:
+  - Motor (EVE): músculo estilofaríngeo, ayuda a la deglución.
+  - Secretomotor parasimpático (EVG): glándula salival parótida.
+  - Sensitivo (AVG, AVE, ASG): sensación general y gusto del tercio posterior de la lengua y la faringe; seno carotídeo (barorreceptor) y cuerpo carotídeo (quimiorreceptor).
+- X Vago | motor (EVG, EVE) y sensitivo (AVG, AVE, ASG) | corazón y grandes vasos torácicos; laringe, tráquea, bronquios y pulmones; tubo digestivo desde la faringe hasta el ángulo esplénico del colon; hígado, riñones y páncreas.
+- XI Accesorio:
+  - Raíz craneal | motor (EVE) | músculos del paladar blando (excepto el tensor del velo del paladar), faringe (excepto el estilofaríngeo) y laringe (excepto el cricotiroideo), a través de ramos del vago.
+  - Raíz espinal | motor (EVE) | músculos esternocleidomastoideo y trapecio.
+- XII Hipogloso | motor (ESG) | músculos de la lengua (excepto el palatogloso), que controlan su forma y movimiento.
+- Los nervios III, IV, V1 y VI salen todos por la fisura orbitaria superior (también llamada hendidura esfenoidal).
+
+### Figuras de la presentación 2026
+- Raíces en la cara anterior del tronco: el nervio facial tiene una raíz motora y una raíz sensitiva (nervio intermedio); raíces craneales y raíz espinal del accesorio.
+- Olfatorio: el epitelio olfatorio tiene células olfatorias (con pelos olfatorios o cilios en el moco), células de sostén y células basales; los nervios olfatorios atraviesan la lámina cribosa del etmoides hasta el bulbo olfatorio, donde hacen sinapsis con las células mitrales, en penacho y granulares en los glomérulos sinápticos; del bulbo sale el tracto olfatorio, que se divide en estrías olfatorias medial y lateral (esta hacia el área olfatoria de la corteza, cerca del uncus); la estría medial cruza por la comisura anterior.
+- Vía óptica: campos visuales temporal y nasal, mácula, nervio óptico, quiasma óptico, tracto óptico, cuerpo geniculado lateral, radiación óptica y corteza visual (área 17, con las áreas 18 y 19 alrededor).
+- Reflejo corneal: el estímulo en la córnea viaja por el ramo oftálmico del trigémino y el ganglio sensitivo del trigémino al núcleo sensitivo principal; por el fascículo longitudinal medial llega al núcleo motor del facial, y el nervio facial cierra el ojo con el orbicular del ojo.
+- Reflejo visual corporal: fibras del tracto óptico llegan al colículo superior, de donde salen los fascículos tectobulbar (tectomedular) y tectoespinal hacia los núcleos motores de los pares craneales y las motoneuronas del cuerno anterior.
+- Oculomotor: ramo superior (recto superior y elevador del párpado superior) y ramo inferior (recto medial, recto inferior y oblicuo inferior); el ramo inferior da fibras parasimpáticas al ganglio ciliar, de donde salen los nervios ciliares cortos hacia el ojo.
+- Trigémino: ganglio del trigémino con las divisiones oftálmica (nervios frontal, lagrimal y nasociliar), maxilar (nervio infraorbitario, nervios alveolares superiores) y mandibular (nervios auriculotemporal, lingual, alveolar inferior y milohioideo).
+- Facial: ramos temporal, cigomático, bucal superior, bucal inferior, mandibular marginal y cervical (al platisma); ramo auricular posterior; nervio al estilohioideo y al vientre posterior del digástrico.
+- Vestibulococlear: el nervio vestibular tiene el ganglio vestibular y recibe del utrículo y de las ampollas de los conductos semicirculares superior, lateral y posterior; el nervio coclear sale del ganglio espiral de la cóclea (conducto coclear); ambos entran al tronco entre el puente y la médula oblongada.
+- Glosofaríngeo: raíces del glosofaríngeo, ganglios sensitivos superior e inferior, ramo timpánico y plexo timpánico, nervio petroso menor hasta el ganglio ótico y la glándula parótida, nervio del seno carotídeo (seno y cuerpo carotídeo), ramo faríngeo, ramos amigdalinos, ramos linguales al tercio posterior de la lengua, músculo estilofaríngeo.
+- Vago: ganglios sensitivos superior e inferior, ramo faríngeo, nervio laríngeo superior (laríngeo interno y externo), nervios laríngeos recurrentes derecho e izquierdo, ramos cardíacos, plexos cardíaco, pulmonar anterior y esofágico, ramo celíaco del vago derecho y plexo celíaco; llega a corazón, pulmones, esófago, hígado, estómago, bazo y riñón.
+- Accesorio: la raíz craneal sale de la médula oblongada y se une al vago; la raíz (porción) espinal nace de los segmentos cervicales C1 a C5 de la médula espinal y da nervios al esternocleidomastoideo y al trapecio.
+- Hipogloso: inerva los músculos estilogloso, hiogloso y geniogloso; acompañado por fibras de C1 que van al geniohioideo y al tirohioideo; el ramo descendente del hipogloso y el nervio cervical descendente (C2–C3) forman el asa cervical; el nervio lingual pasa por encima.
+- Núcleos de los pares craneales (vista posterior del tronco): núcleo del oculomotor y troclear (mesencéfalo), núcleo mesencefálico, sensitivo principal y motor del trigémino, núcleo del abducens, núcleo del facial, núcleos dorsales coclear y vestibular, núcleo ambiguo, núcleo vagal dorsal, núcleo del hipogloso, núcleo del tracto solitario y núcleo espinal del trigémino.
+
 ## Detalle por par craneal
 
 ### I – Olfatorio (sensitivo)
@@ -67,7 +112,7 @@
 ### IV – Troclear (motor)
 - Núcleo troclear: anterior al acueducto cerebral, a nivel del colículo inferior.
 - Sale por la cara posterior del mesencéfalo y se cruza con el nervio troclear del otro lado. Origen aparente: cara posterior del mesencéfalo.
-- Inerva el músculo oblicuo superior. Según la presentación del tallo, mueve el globo ocular hacia abajo y hacia afuera; la tabla de la Unidad 9 lo describe como mirada hacia abajo y medial. No preguntar la dirección exacta (afuera vs medial).
+- Inerva el músculo oblicuo superior, que ayuda a girar el globo ocular hacia abajo y hacia afuera (lateralmente), según la presentación del tallo y la tabla del libro. La tabla de la Unidad 9 lo describe como mirada hacia abajo y medial. No preguntar la dirección exacta (afuera vs medial).
 - Por su pequeño tamaño, puede estirarse y dañarse en los traumatismos craneoencefálicos (igual que el VI).
 
 ### V – Trigémino (sensitivo y motor)

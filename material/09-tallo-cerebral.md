@@ -21,7 +21,7 @@
 - Superficie posterior: tubérculo grácil (y cuneiforme), piso del cuarto ventrículo en su parte superior.
 
 ### Núcleos de pares craneales en el bulbo
-- Núcleo ambiguo: motor de los pares IX, X y XI (la presentación incluye también el V).
+- Núcleo ambiguo: motor de los pares IX, X y XI. (La versión 2024 de la presentación incluía también el V; la versión 2026 lo corrigió a IX, X y XI.)
 - Núcleo vagal dorsal (motor dorsal del vago): parasimpático (X).
 - Núcleo del tracto solitario: sensitivo de los pares VII, IX y X.
 - Núcleo salival inferior: parasimpático del IX.
