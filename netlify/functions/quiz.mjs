@@ -1,8 +1,14 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const model = 'gemini-3.5-flash-lite';
-const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+// El segundo modelo es de respaldo: tiene su propio cupo y suele seguir disponible cuando el principal se satura.
+// (gemini-3.5-flash no sirve de respaldo: su cupo gratuito es de solo 20 solicitudes al día.)
+const models = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite'];
+const baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
+// Netlify corta la función a los 10 s; se deja margen para responder antes de ese límite.
+const budgetMs = 9000;
+const fallbackAfterMs = 3500;
+const minTimeForRetryMs = 4000;
 const materialDir = path.resolve('material');
 const allTopics = 'all';
 const quoteSchema = {
@@ -137,44 +143,88 @@ function shuffleOptions(quiz) {
   return { ...quiz, options, correctIndex: options.indexOf(correct) };
 }
 
-// La saturación (503) suele durar segundos; se reintenta antes de mostrarle un error a la estudiante.
-async function askGemini(body) {
-  for (let attempt = 1; ; attempt++) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
-      body: JSON.stringify(body),
-    });
-    if (response.status !== 503 || attempt === 3) return response;
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function callModel(model, body, signal) {
+  const response = await fetch(`${baseUrl}/${model}:generateContent`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
+    body: JSON.stringify(body),
+    signal,
+  });
+  const data = await response.json();
+  if (data.error) throw Object.assign(new Error(data.error.message), { status: response.status });
+  return data;
+}
+
+// Gemini a veces tarda más de un minuto o responde 503 por saturación. Si un modelo falla o no contesta
+// a tiempo, se lanza el siguiente en paralelo y se usa la primera respuesta que llegue.
+async function askGemini(body, deadline) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), Math.max(deadline - Date.now(), 0));
+  const errors = [];
+  let answered = false;
+
+  const launch = (index) => {
+    if (answered || index >= models.length) return Promise.reject(new Error('No quedan modelos de respaldo.'));
+    const call = callModel(models[index], body, controller.signal).then(
+      (data) => {
+        answered = true;
+        return data;
+      },
+      (error) => {
+        errors.push(error);
+        throw error;
+      },
+    );
+    const next = Promise.race([wait(fallbackAfterMs), call.catch(() => {})]).then(() => launch(index + 1));
+    return Promise.any([call, next]);
+  };
+
+  try {
+    return await launch(0);
+  } catch {
+    // Solo se informa el límite de uso si todos los modelos lo alcanzaron; si no, es saturación y la página reintenta.
+    const allLimited = errors.length === models.length && errors.every((error) => error.status === 429);
+    throw allLimited ? errors[0] : (errors.find((error) => error.status !== 429) ?? errors[0]);
+  } finally {
+    clearTimeout(timer);
+    // Cancela la solicitud que haya quedado pendiente.
+    controller.abort();
   }
 }
 
-function friendlyError(status, error) {
-  if (status === 429) return 'Se alcanzó el límite de uso de Gemini. Espera un minuto (o hasta mañana si fue el límite diario).';
-  if (status === 503) return 'El modelo está saturado en este momento. Intenta de nuevo en unos segundos.';
+function friendlyError(error) {
+  if (error.status === 429) return 'Se alcanzó el límite de uso de Gemini. Espera un minuto (o hasta mañana si fue el límite diario).';
+  if (error.status === 503 || error.name === 'AbortError') return 'Gemini está saturado en este momento. Intenta de nuevo en unos segundos.';
   return `Error de Gemini: ${error.message}`;
 }
 
-async function generate(type, material, prompt) {
+async function generate(type, material, prompt, deadline) {
   const system =
     'Eres un tutor que ayuda a una estudiante a preparar un parcial. Usa exclusivamente el material de abajo; no agregues información que no esté en él. ' +
     'Si el material marca un dato como discrepancia o dice que no se pregunte, no hagas preguntas sobre ese dato. ' +
     'Escribe en español, en texto plano sin markdown, de forma clara y cercana, sin saludos.\n\n=== MATERIAL ===\n' +
     material;
 
-  const response = await askGemini({
-    systemInstruction: { parts: [{ text: system }] },
-    contents: [{ role: 'user', parts: [{ text: prompt }] }],
-    // Al evaluar se baja la temperatura para que la misma respuesta reciba la misma nota.
-    generationConfig: {
-      responseMimeType: 'application/json',
-      responseSchema: schemas[type],
-      ...(type === 'grade' && { temperature: 0.2 }),
-    },
-  });
-  const data = await response.json();
-  if (data.error) return { status: response.status, error: friendlyError(response.status, data.error) };
+  let data;
+  try {
+    data = await askGemini(
+      {
+        systemInstruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        // Al evaluar se baja la temperatura para que la misma respuesta reciba la misma nota.
+        generationConfig: {
+          responseMimeType: 'application/json',
+          responseSchema: schemas[type],
+          ...(type === 'grade' && { temperature: 0.2 }),
+        },
+      },
+      deadline,
+    );
+  } catch (error) {
+    return { status: error.status === 429 ? 429 : 503, error: friendlyError(error) };
+  }
 
   const text = data.candidates[0].content.parts.filter((part) => !part.thought).map((part) => part.text).join('');
   return { result: JSON.parse(text), tokens: data.usageMetadata.totalTokenCount };
@@ -192,19 +242,22 @@ export default async (req) => {
   if (!material) return Response.json({ error: 'La sección elegida no existe.' }, { status: 400 });
 
   const prompt = prompts[type]({ asked, question, answer });
-  // Una pregunta cuya cita no aparece en el material probablemente fue inventada: se descarta y se pide otra una vez.
+  const deadline = Date.now() + budgetMs;
+  // Una pregunta cuya cita no aparece en el material probablemente fue inventada: se descarta y, si queda
+  // tiempo, se pide otra. Si no, la página reintenta con una nueva llamada.
   let tokens = 0;
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    const { result, tokens: used, status, error } = await generate(type, material, prompt);
+  do {
+    const { result, tokens: used, status, error } = await generate(type, material, prompt, deadline);
     if (error) return Response.json({ error, tokens }, { status });
 
     // tokens: la página lo usa para calcular cuánto esperar antes de la siguiente consulta.
     tokens += used;
     if (type === 'grade') return Response.json({ ...result, tokens });
-    if (!quoteIsInMaterial(result.quote, material)) continue;
-    return Response.json(type === 'mcq' ? shuffleOptions({ ...result, tokens }) : { ...result, tokens });
-  }
-  return Response.json({ error: 'No se pudo generar una pregunta verificada contra el material. Intenta de nuevo.', tokens }, { status: 502 });
+    if (quoteIsInMaterial(result.quote, material)) {
+      return Response.json(type === 'mcq' ? shuffleOptions({ ...result, tokens }) : { ...result, tokens });
+    }
+  } while (deadline - Date.now() > minTimeForRetryMs);
+  return Response.json({ error: 'No se pudo generar una pregunta verificada contra el material. Intenta de nuevo.', tokens }, { status: 503 });
 };
 
 export const config = { path: '/api/quiz' };

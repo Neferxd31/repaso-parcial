@@ -225,6 +225,7 @@
     #loading { padding: 30px 0; text-align: center; }
     .dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; }
     #loading-time { margin: 0; color: var(--muted); font-weight: 700; }
+    #loading-retry { margin: 6px 0 0; color: var(--pink); font-weight: 700; min-height: 1.6em; }
     .back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 8px 16px; font-size: 0.95rem; }
     #loading span { width: 14px; height: 14px; border-radius: 50%; background: var(--pink); animation: dot 1s ease-in-out infinite; }
     #loading span:nth-child(2) { background: var(--primary); animation-delay: 0.15s; }
@@ -418,6 +419,7 @@
         <div id="loading" hidden>
           <div class="dots"><span></span><span></span><span></span></div>
           <p id="loading-time"></p>
+          <p id="loading-retry"></p>
         </div>
 
         <div id="error" hidden>
@@ -538,16 +540,30 @@
       else $('start-note').textContent = selectedMode ? '' : 'Elige el tipo de sección para empezar.';
     }
 
+    // Los 5xx suelen ser saturación pasajera de Gemini (o el corte de 10 s de Netlify): se reintenta solo.
+    const maxAttempts = 4;
+    const retryDelayMs = 2000;
+
     async function callQuiz(body) {
-      const response = await fetch('/api/quiz', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      const data = await response.json().catch(() => ({ error: 'Error inesperado del servidor.' }));
-      startCooldown(response.status === 429 ? 60 : cooldownFor(data.tokens ?? 0));
-      if (!response.ok) throw new Error(data.error);
-      return data;
+      for (let attempt = 1; ; attempt++) {
+        const response = await fetch('/api/quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        }).catch(() => null);
+        const status = response?.status ?? 503;
+        const data = (await response?.json().catch(() => null)) ?? { error: 'Gemini no respondió a tiempo. Intenta de nuevo.' };
+
+        if (status >= 500 && attempt < maxAttempts) {
+          $('loading-retry').textContent = `Gemini está lento, reintentando (${attempt + 1}/${maxAttempts})…`;
+          await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
+          continue;
+        }
+        $('loading-retry').textContent = '';
+        startCooldown(status === 429 ? 60 : cooldownFor(data.tokens ?? 0));
+        if (status >= 400) throw new Error(data.error);
+        return data;
+      }
     }
 
     async function run(action, loadingText, hideQuestion) {
